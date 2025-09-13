@@ -46,50 +46,50 @@ def generate_image():
             img.putpixel((x, y), (r, g, b, a))
 
     img.save(filepath)
-    messagebox.showinfo("Success", f"Image saved to {filepath}")
 
     # Update preview
-    preview_img = ImageTk.PhotoImage(img.resize((256, 256)))
+    preview_img = ImageTk.PhotoImage(img.resize((512, 512)))  # Larger preview
     label_preview.config(image=preview_img, text="")  # Remove placeholder text
 
 if __name__ == "__main__":
     os.makedirs("img", exist_ok=True)
     root = tk.Tk()
-    root.title("")
+    root.title("py-img-gen")
+    root.geometry("600x700")  # Set window size bigger
 
     # Output filename
     tk.Label(root, text="Output File Name:").pack(pady=2)
-    entry_filename = tk.Entry(root, width=30)
+    entry_filename = tk.Entry(root, width=40)
     entry_filename.pack(pady=2)
 
     # R formula
     tk.Label(root, text="Red (R) formula:").pack(pady=2)
-    entry_r = tk.Entry(root, width=30)
+    entry_r = tk.Entry(root, width=40)
     entry_r.pack(pady=2)
-    entry_r.insert(0, "(sin(x/20)+1)*127")  # default example
+    entry_r.insert(0, "(sin(x/20)+1)*127")
 
     # G formula
     tk.Label(root, text="Green (G) formula:").pack(pady=2)
-    entry_g = tk.Entry(root, width=30)
+    entry_g = tk.Entry(root, width=40)
     entry_g.pack(pady=2)
     entry_g.insert(0, "(cos(y/20)+1)*127")
 
     # B formula
     tk.Label(root, text="Blue (B) formula:").pack(pady=2)
-    entry_b = tk.Entry(root, width=30)
+    entry_b = tk.Entry(root, width=40)
     entry_b.pack(pady=2)
     entry_b.insert(0, "(sin((x+y)/30)+1)*127")
 
     # A formula
     tk.Label(root, text="Alpha (A) formula (optional, default 255):").pack(pady=2)
-    entry_a = tk.Entry(root, width=30)
+    entry_a = tk.Entry(root, width=40)
     entry_a.pack(pady=2)
 
-    btn = tk.Button(root, text="generate image", command=generate_image)
+    btn = tk.Button(root, text="Generate Image", command=generate_image)
     btn.pack(pady=10)
 
     # Preview area
-    label_preview = tk.Label(root, text="No image generated yet", width=32, height=16, relief="solid")
+    label_preview = tk.Label(root, text="No image generated yet", width=64, height=32, relief="solid")
     label_preview.pack(pady=10)
 
     root.mainloop()
